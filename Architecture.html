@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Management System - Architecture</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 1400px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.2em;
+        }
+        .architecture {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .layer {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            border: 3px solid #667eea;
+        }
+        .layer-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        .class-box {
+            background: white;
+            border: 2px solid #764ba2;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .class-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .class-name {
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 5px;
+        }
+        .class-type {
+            font-size: 0.85em;
+            color: #666;
+            font-style: italic;
+        }
+        .features {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            border: 3px solid #667eea;
+        }
+        .features-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            text-align: center;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        .feature-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .feature-item strong {
+            color: #764ba2;
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .legend-box {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            border: 2px solid #333;
+        }
+        .abstract { background: #ffe4e1; }
+        .concrete { background: #e1f5ff; }
+        .interface { background: #fff4e1; }
+        .record { background: #e8f5e9; }
+        .enum { background: #f3e5f5; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍽️ Restaurant Management System</h1>
+        <div class="subtitle">Java 21 LTS Architecture Diagram</div>
+        
+        <div class="architecture">
+            <!-- Layer 1: Domain Models -->
+            <div class="layer">
+                <div class="layer-title">Domain Models</div>
+                <div class="class-box concrete">
+                    <div class="class-name">Restaurant</div>
+                    <div class="class-type">Main Controller</div>
+                </div>
+                <div class="class-box abstract">
+                    <div class="class-name">Employee</div>
+                    <div class="class-type">Abstract Base</div>
+                </div>
+                <div class="class-box concrete">
+                    <div class="class-name">├─ Chef</div>
+                    <div class="class-type">Inheritance</div>
+                </div>
+                <div class="class-box concrete">
+                    <div class="class-name">├─ Waiter</div>
+                    <div class="class-type">Inheritance</div>
+                </div>
+                <div class="class-box concrete">
+                    <div class="class-name">└─ Manager</div>
+                    <div class="class-type">Inheritance</div>
+                </div>
+                <div class="class-box concrete">
+                    <div class="class-name">Customer</div>
+                    <div class="class-type">Domain Model</div>
+                </div>
+                <div class="class-box concrete">
+                    <div class="class-name">Order</div>
+                    <div class="class-type">Domain Model</div>
+                </div>
+                <div class="class-box concrete">
+                    <div class="class-name">Reservation</div>
+                    <div class="class-type">Domain Model</div>
+                </div>
+            </div>
+
+            <!-- Layer 2: Type-Safe Enums -->
+            <div class="layer">
+                <div class="layer-title">Enumerations</div>
+                <div class="class-box enum">
+                    <div class="class-name">MenuCategory</div>
+                    <div class="class-type">Rich Enum</div>
+                </div>
+                <div class="class-box enum">
+                    <div class="class-name">OrderStatus</div>
+                    <div class="class-type">Enum</div>
+                </div>
+                <div class="class-box enum">
+                    <div class="class-name">ReservationStatus</div>
+                    <div class="class-type">Enum</div>
+                </div>
+                <div class="class-box concrete">
+                    <div class="class-name">TableType</div>
+                    <div class="class-type">Sealed Concept</div>
+                </div>
+            </div>
+
+            <!-- Layer 3: Modern Java Features -->
+            <div class="layer">
+                <div class="layer-title">Java 21 Features</div>
+                <div class="class-box record">
+                    <div class="class-name">MenuItem</div>
+                    <div class="class-type">Record</div>
+                </div>
+                <div class="class-box interface">
+                    <div class="class-name">Payment</div>
+                    <div class="class-type">Sealed Interface</div>
+                </div>
+                <div class="class-box record">
+                    <div class="class-name">├─ CreditCardPayment</div>
+                    <div class="class-type">Record</div>
+                </div>
+                <div class="class-box record">
+                    <div class="class-name">├─ CashPayment</div>
+                    <div class="class-type">Record</div>
+                </div>
+                <div class="class-box record">
+                    <div class="class-name">└─ DigitalWalletPayment</div>
+                    <div class="class-type">Record</div>
+                </div>
+                <div class="class-box concrete">
+                    <div class="class-name">Address</div>
+                    <div class="class-type">Immutable Type</div>
+                </div>
+            </div>
+
+            <!-- Layer 4: Exception Handling -->
+            <div class="layer">
+                <div class="layer-title">Exceptions</div>
+                <div class="class-box concrete">
+                    <div class="class-name">ReservationException</div>
+                    <div class="class-type">Checked Exception</div>
+                </div>
+                <div class="class-box concrete">
+                    <div class="class-name">InvalidOrderException</div>
+                    <div class="class-type">Unchecked Exception</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="features-title">📚 Java 21 Features Demonstrated</div>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <strong>Classes:</strong> 23 files
+                </div>
+                <div class="feature-item">
+                    <strong>this() vs this.:</strong> Restaurant
+                </div>
+                <div class="feature-item">
+                    <strong>Overloading:</strong> addMenuItem()
+                </div>
+                <div class="feature-item">
+                    <strong>Varargs:</strong> addItems(...)
+                </div>
+                <div class="feature-item">
+                    <strong>LVTI:</strong> var restaurant
+                </div>
+                <div class="feature-item">
+                    <strong>Encapsulation:</strong> All classes
+                </div>
+                <div class="feature-item">
+                    <strong>Interfaces:</strong> Payment
+                </div>
+                <div class="feature-item">
+                    <strong>Inheritance:</strong> Employee hierarchy
+                </div>
+                <div class="feature-item">
+                    <strong>Polymorphism:</strong> displayInfo()
+                </div>
+                <div class="feature-item">
+                    <strong>super() vs super.:</strong> Chef
+                </div>
+                <div class="feature-item">
+                    <strong>Exceptions:</strong> Checked/Unchecked
+                </div>
+                <div class="feature-item">
+                    <strong>Enums:</strong> 3 rich enums
+                </div>
+                <div class="feature-item">
+                    <strong>Arrays:</strong> Order items
+                </div>
+                <div class="feature-item">
+                    <strong>Core API:</strong> String, ArrayList, Date
+                </div>
+                <div class="feature-item">
+                    <strong>Defensive Copying:</strong> getters
+                </div>
+                <div class="feature-item">
+                    <strong>Interface Methods:</strong> default, static
+                </div>
+                <div class="feature-item">
+                    <strong>Records:</strong> MenuItem, Payments
+                </div>
+                <div class="feature-item">
+                    <strong>Immutable Type:</strong> Address
+                </div>
+                <div class="feature-item">
+                    <strong>Lambdas:</strong> Predicates
+                </div>
+                <div class="feature-item">
+                    <strong>Method References:</strong> ::println
+                </div>
+                <div class="feature-item">
+                    <strong>Pattern Matching:</strong> instanceof
+                </div>
+                <div class="feature-item">
+                    <strong>Sealed Types:</strong> Payment interface
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box abstract"></div>
+                <span>Abstract Class</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box concrete"></div>
+                <span>Concrete Class</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box interface"></div>
+                <span>Interface</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box record"></div>
+                <span>Record</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box enum"></div>
+                <span>Enum</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
